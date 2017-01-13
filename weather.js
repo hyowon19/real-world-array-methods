@@ -1498,8 +1498,8 @@ var weatherData = {
 // is going to be any rain in the next 24 hours. The method you use should return true or false.
 
 function willRainToday() {
-   return weatherData.hourly.data.some(function(x) {
-        return(x.precipType === "rain")
+   return weatherData.hourly.data.slice(0,24).some(function(x) {
+        return x.precipType === "rain"
     });
 }
 
@@ -1512,3 +1512,18 @@ console.log(willRainToday())
 
 // Eliminate any item where the time is further than 8 hours from now.
 // Do the same thing as part 1.
+
+
+function willItRainInEightHours() {
+    return weatherData.hourly.data.slice(0,8).some(function(x) {
+        return x.precipType === "rain"
+    });
+}
+
+console.log(willItRainInEightHours());
+
+
+// Just give me the temperature
+// Using the appropriate array method, start with the hourly data and return an array of only 
+// the temperatures. Your returned array should have the same number of elements as the original array.
+// Example output: [72.9, 70.5, ...]
