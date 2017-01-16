@@ -1527,3 +1527,65 @@ console.log(willItRainInEightHours());
 // Using the appropriate array method, start with the hourly data and return an array of only 
 // the temperatures. Your returned array should have the same number of elements as the original array.
 // Example output: [72.9, 70.5, ...]
+
+
+function giveTemperature() {
+    return weatherData.hourly.data.map(function(x) {
+       return x.temperature
+    });
+}
+
+console.log(giveTemperature());
+
+// When is it going to rain?
+// Using a chain of two array methods, start with the hourly data and return an array of Date 
+// objects saying when it will rain. To do this, you'll have to:
+// Eliminate any item where it is not raining.
+// Extract the time from the remaining items and create a Date object
+
+function whenWillRain () {
+    return weatherData.hourly.data.filter(function(x){
+        return x.precipType === "rain"
+    }).reduce(function(a, x){
+        a.push(new Date(x.time * 1000));
+        return a;
+    },[])
+};
+
+
+console.log(whenWillRain())
+
+// Is it going to be sunny all week?
+// Using the appropriate array method, start with the daily data and figure out whether 
+// it will be sunny every day of the week. Use the summary and check if it contains the word 
+// "sun" using your preferred method.
+
+function sunnyAllWeek() {
+    return weatherData.daily.data.every(function(x){
+        if (x.summary.includes("sun",0)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    })
+}
+
+console.log (sunnyAllWeek());
+
+
+// How hot will it be today?
+// Using the appropriate array method, start with the hourly data and figure out what will 
+// be the hottest temperature today. As a hint, notice that you will need to visit each item 
+// in turn, but also keep track of a separate value.
+
+function hottestTemp() {
+    return weatherData.hourly.data.reduce(function(temp, isHot){
+        if(temp < isHot.temperature) {
+            temp = isHot.temperature;
+        }
+        return temp;
+    },-Infinity)
+}
+
+console.log(hottestTemp());
